@@ -5,15 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/hello")
-public class HelloController {
+@RequestMapping("/objetivosSemana")
+public class ObjetivosSemana {
 
 	@GetMapping
-	public String hello() {
-		return "Hello World";
-	}
-		
-	@GetMapping("/objetivosSemana")
 	public String objetivosSemana() {
 		return "Finalizar aprendizagem sobre MySQL e iniciar conhecimentos sobre Spring.";
 	}
