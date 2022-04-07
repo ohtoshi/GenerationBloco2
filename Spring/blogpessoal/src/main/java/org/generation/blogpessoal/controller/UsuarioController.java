@@ -3,8 +3,6 @@ package org.generation.blogpessoal.controller;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.generation.blogpessoal.model.Usuario;
 import org.generation.blogpessoal.model.UsuarioLogin;
 import org.generation.blogpessoal.repository.UsuarioRepository;
@@ -37,7 +35,7 @@ public class UsuarioController {
 	}
 	
 	@PostMapping("/cadastrar")
-	public ResponseEntity<Usuario> cadastraUsuario(@Valid @RequestBody Usuario usuario){
+	public ResponseEntity<Usuario> cadastraUsuario(@RequestBody Usuario usuario){
 		return usuarioService.cadastrarUsuario(usuario)
 				.map(resposta -> ResponseEntity.status(HttpStatus.CREATED).body(resposta))
 				.orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
@@ -51,7 +49,7 @@ public class UsuarioController {
 	}
 	
 	@PutMapping("/atualizar")  // para atualizar dados do usuário
-    public ResponseEntity<Usuario> putUsuario(@Valid @RequestBody Usuario usuario){
+    public ResponseEntity<Usuario> putUsuario(@RequestBody Usuario usuario){
         return usuarioService.atualizarUsuario(usuario)
             .map(resp -> ResponseEntity.status(HttpStatus.OK).body(resp))
             .orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());

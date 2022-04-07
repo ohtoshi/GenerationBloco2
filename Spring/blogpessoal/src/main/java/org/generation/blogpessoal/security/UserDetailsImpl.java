@@ -2,7 +2,9 @@ package org.generation.blogpessoal.security;
 
 import java.util.Collection;
 import java.util.List;
+
 import org.generation.blogpessoal.model.Usuario;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -16,11 +18,17 @@ public class UserDetailsImpl implements UserDetails{
 	
 	
 	public UserDetailsImpl(Usuario usuario) { // puxando informações de usuário e senha
-		userName = usuario.getUsuario();
-		password = usuario.getSenha();
+		this.userName = usuario.getUsuario();
+		this.password = usuario.getSenha();
 	}
 
-	public UserDetailsImpl() {} //para teste com usuário e senha, método construtor vazio
+	public UserDetailsImpl() {  } //para teste com usuário e senha, método construtor vazio
+	
+	// métodos padrão basic security
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return authorities;
+	}
 	
 	@Override // informação para considerar apenas a senha
 	public String getPassword() {
@@ -31,23 +39,17 @@ public class UserDetailsImpl implements UserDetails{
 	public String getUsername() {
 		return userName;
 	}
-	
-	// métodos padrão basic security
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return authorities;
-	}
 
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;
 	}
-	
+
 	@Override
 	public boolean isAccountNonLocked() {
 		return true;
 	}
-	
+
 	@Override
 	public boolean isCredentialsNonExpired() {
 		return true;
