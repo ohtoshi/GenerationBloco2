@@ -16,32 +16,46 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name="tb_usuarios")
+@Table(name = "tb_usuarios")
 public class Usuario {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotNull
 	@Size(min = 2, max = 100)
 	private String nome;
-	
+
 	@NotNull
-	@Email  // valida se a informação é e-mail, sem tem @ e .com
+	@Email // valida se a informação é e-mail, sem tem @ e .com
 	@Size(min = 5, max = 100)
 	private String usuario;
-	
+
 	@NotNull
 	@Size(min = 5, max = 100)
 	private String senha;
-	
+
 	private String foto;
-	
-	@OneToMany(mappedBy="usuario", cascade = CascadeType.REMOVE) // quando um usuário for excluído, exclui postagens
+
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE) // quando um usuário for excluído, exclui postagens
 	@JsonIgnoreProperties("usuario") // ignora recursividade dos gets
 	private List<Postagem> postagens;
+
+	// Métodos construtores para testes
+	// Importante seguir a mesma ordem das declarações dos atributos de usuario acima
+	// Construtor cheio
+	public Usuario(Long id, String nome, String usuario, String senha, String foto) {
+		this.id = id;
+		this.nome = nome;
+		this.usuario = usuario;
+		this.senha = senha;
+		this.foto = foto;
+	}
 	
+	// Construtor vazio - permite testar o que quisermos
+	public Usuario() {}
+
 	public Long getId() {
 		return id;
 	}
@@ -81,7 +95,7 @@ public class Usuario {
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
-	
+
 	public List<Postagem> getPostagens() {
 		return postagens;
 	}

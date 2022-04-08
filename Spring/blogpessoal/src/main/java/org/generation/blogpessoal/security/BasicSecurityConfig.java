@@ -40,6 +40,7 @@ public class BasicSecurityConfig extends WebSecurityConfigurerAdapter{
 		http.authorizeHttpRequests() // para que a aplicação não fique bloqueada
 		.antMatchers("/usuarios/logar").permitAll() // permitir para logar
 		.antMatchers("/usuarios/cadastrar").permitAll() // permitir para cadastrar
+		.antMatchers("/usuarios/atualizar").permitAll() // permitir para atualizar cadastro antes do login
 		.antMatchers(HttpMethod.OPTIONS).permitAll()
 		.anyRequest().authenticated() // qualquer requisição precisa de login (autenticação)
 		.and().httpBasic()
